@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+      
+ 	<th:block layout:fragment="title">こんにちは！</th:block>
+    <th:block layout:fragment="caption">ラピードアクトの人事管理システムです。</th:block>
+	<th:block layout:fragment="content">
+		<div>お疲れ様です。</div>
+		<div class="mb-3">このシステムは2021.02.03(水)から再開発しました。</div>
+		
+		<div class="_500">TODO</div>
+		<div>1. ログインページ 開発</div>
+		<div>2. spring security 導入</div>
+		<div>3. 管理者 開発</div>
+		<div>4. 応募者 開発</div>
+		<div>5. version 1.0 リリース</div>
+    </th:block>	
+    
+</html>

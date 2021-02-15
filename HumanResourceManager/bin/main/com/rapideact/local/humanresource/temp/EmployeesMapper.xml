@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.rapideact.local.humanresource.mybatis.mapper.EmployeesMapper">
+
+	<insert id="userCreate"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.EmployeesCondition">
+		INSERT INTO employees
+		(employees_id,date,sei_kj,mei_kj,sei_kana,mei_kana,gender,birthday,phone_number,address,employment,division,job_title,date_of_joining,remark)
+		VALUES
+		(#{employeesId},#{date},#{seiKj},#{meiKj},#{seiKana},#{meiKana},#{gender},#{birthday},#{phoneNumber},#{address},#{employment},#{division},#{jobTitle},#{dateOfJoining},#{remarks})
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			select
+			@@IDENTITY
+		</selectKey>
+	</insert>
+
+
+	<!--Detail　勤怠登録 -->
+	<insert id="userAttendanceCreate"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.EmployeesCondition">
+		INSERT INTO employees_attendance
+		(employees_id,attendance_ym,attendance_date,attendance,start_time,end_time,break_time,remark)
+		VALUES
+		(#{employeesId},#{attendanceYm},#{attendanceDate},#{attendance},#{startTime},#{endTime},#{breakTime},#{remark})
+		<selectKey resultType="int" keyProperty="attendanceId" order="BEFORE">
+			select
+			@@IDENTITY
+		</selectKey>
+		 ON DUPLICATE KEY UPDATE
+		 attendance = #{attendance},
+		 start_time = #{startTime},
+		 end_time = #{endTime},
+		 break_time = #{breakTime},
+		 remark = #{remark}
+
+	</insert>
+
+
+	<!--Detail　社員番号検索処理 -->
+	<select id="userEmployeesIdSearch" resultMap="userResultMap" parameterType="String">
+		SELECT * FROM employees
+		WHERE
+		concat(sei_kj, mei_kj) = #{stuffName}
+
+	</select>
+
+
+	<select id="userSearch" resultMap="userResultMap"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.EmployeesCondition">
+		SELECT *
+		FROM employees
+		<where>
+			<if test="name !=null and name!=''">
+				concat(sei_kj, mei_kj, sei_kana, mei_kana) LIKE '%${name}%'
+			</if>
+
+			<if test="birthdayFrom !=null and birthdayFrom !=''">
+				AND birthday <![CDATA[ >= ]]>
+				#{birthdayFrom}
+			</if>
+			<if test="birthdayTo !=null and birthdayTo !=''">
+				AND birthday <![CDATA[ < ]]>
+				#{birthdayTo}
+			</if>
+		</where>
+	</select>
+
+	<!--Detail　社員検索 -->
+	<select id="userEmployeesSearch" resultMap="userResultMap"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.EmployeesCondition">
+		SELECT *
+		FROM
+			employees
+		<!-- INNER JOIN -->
+	</select>
+
+	<resultMap id="userResultMap"
+		type="com.rapideact.local.humanresource.mybatis.domain.EmployeesDomain">
+		<result property="employeesId" column="employees_id" />
+		<result property="date" column="date" />
+		<result property="seiKj" column="sei_kj" />
+		<result property="meiKj" column="mei_kj" />
+		<result property="seiKana" column="sei_kana" />
+		<result property="meiKana" column="mei_kana" />
+		<result property="gender" column="gender" />
+		<result property="birthday" column="birthday" />
+		<result property="phoneNumber" column="phone_number" />
+		<result property="jobTitle" column="job_title" />
+		<result property="dateOfJoining" column="date_of_joining" />
+		<result property="dateOfRetirement" column="date_of_retirement" />
+		<result property="address" column="address" />
+		<result property="remarks" column="remark" />
+	</resultMap>
+
+	<delete id="userDelete"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.EmployeesCondition">
+		DELETE FROM employees
+
+		WHERE
+
+		id=#{id}
+	</delete>
+
+	<!--Detail　検索処理 -->
+	<select id="userShow" resultMap="userResultMap"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.EmployeesCondition">
+		SELECT * FROM employees WHERE employees_id=#{employeesId}
+	</select>
+
+	<!--Detail　更新処理 -->
+	<update id="userDetail"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.EmployeesCondition">
+		UPDATE employees
+		SET date=#{date}, sei_kj=#{seiKj}, mei_kj=#{meiKj}, sei_kana=#{seiKana}, mei_kana=#{meiKana},gender=#{gender}, birthday=#{birthday}, phone_number=#{phoneNumber}, address=#{address}, employment=#{employment}, division=#{division}, job_title=#{jobTitle}, date_of_joining=#{dateOfJoining}, date_of_retirement=#{dateOfRetirement}, remark=#{remarks}
+		WHERE employees_id = #{employeesId}
+	</update>
+
+</mapper>

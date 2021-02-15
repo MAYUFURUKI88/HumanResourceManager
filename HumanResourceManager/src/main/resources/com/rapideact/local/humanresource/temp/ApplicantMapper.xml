@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.rapideact.local.humanresource.mybatis.mapper.ApplicantMapper">
+
+	<insert id="userCreate"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.ApplicantCondition">
+		INSERT INTO applicant
+		(application_date,sei_kj,mei_kj,sei_kana,mei_kana,age,phone_number,gender,experience_code,selection_code,hope_job_code,medium_code,address,mail_code,career,remark)
+		VALUES
+		(#{applicationDate},#{seiKj},#{meiKj},#{seiKana},#{meiKana},#{age},#{phoneNumber},#{gender},#{experienceCode},#{selectionCode},#{hopeJobCode},#{mediumCode},#{address},#{mailCode},#{career},#{remarks})
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			select
+			@@IDENTITY
+		</selectKey>
+	</insert>
+
+
+	<select id="userSearch" resultMap="userResultMap"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.ApplicantCondition">
+		SELECT *
+		FROM applicant
+		<where>
+			<if test="name !=null and name !=''">
+				concat(sei_kj, mei_kj, sei_kana, mei_kana) LIKE
+				'%${name}%'
+			</if>
+
+			<if test="applicationDateFrom !=null and applicationDateFrom !=''">
+				AND application_date <![CDATA[ >= ]]>
+				#{applicationDateFrom}
+			</if>
+			<if test="applicationDateTo !=null and applicationDateTo !=''">
+				AND application_date <![CDATA[ < ]]>
+				#{applicationDateTo}
+			</if>
+			<if test="hopeJobCode !=null and hopeJobCode !=''">
+				AND hope_job_code LIKE '%${hopeJobCode}%'
+			</if>
+			<if test="selectionCode !=null and selectionCode !=''">
+				AND selection_code LIKE '%${selectionCode}%'
+			</if>
+
+			<if test="mediumCode !=null and mediumCode !=''">
+				AND medium_code LIKE '%${mediumCode}%'
+			</if>
+
+		</where>
+	</select>
+
+	<resultMap id="userResultMap"
+		type="com.rapideact.local.humanresource.mybatis.domain.ApplicantDomain">
+		<result property="id" column="id" />
+		<result property="applicationDate" column="application_date" />
+		<result property="seiKj" column="sei_kj" />
+		<result property="meiKj" column="mei_kj" />
+		<result property="seiKana" column="sei_kana" />
+		<result property="meiKana" column="mei_kana" />
+		<result property="remarks" column="remark" />
+		<result property="selectionCode" column="selection_code" />
+		<result property="hopeJobCode" column="hope_job_code" />
+		<result property="mediumCode" column="medium_code" />
+		<result property="experienceCode" column="experience_code" />
+		<result property="career" column="career"/>
+		<result property= "phoneNumber" column="phone_number"/>
+		<result property= "mailCode" column="mail_code"/>
+		<result property= "gender" column="gender"/>
+	</resultMap>
+
+	<delete id="userDelete"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.ApplicantCondition">
+		DELETE FROM applicant
+
+		WHERE
+
+		id=#{id}
+	</delete>
+
+	<!--Detail 検索処理 -->
+	<select id="userShow" resultMap="userResultMap"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.ApplicantCondition">
+		SELECT * FROM applicant WHERE id=#{id}
+	</select>
+
+	<!--Detail 更新処理 -->
+	<update id="userDetail"
+		parameterType="com.rapideact.local.humanresource.mybatis.condition.ApplicantCondition">
+		UPDATE applicant
+		SET
+		application_date=#{applicationDate},
+		sei_kj=#{seiKj},
+		mei_kj=#{meiKj},
+		sei_kana=#{seiKana},
+		mei_kana=#{meiKana},
+		address=#{address},
+		mail_code=#{mailCode},
+		age=#{age},
+		phone_number=#{phoneNumber},
+		gender=#{gender},
+		experience_code=#{experienceCode},
+		selection_code=#{selectionCode},
+		hope_job_code=#{hopeJobCode},
+		medium_code=#{mediumCode},
+		career=#{career},
+		remark=#{remarks}
+		WHERE id =
+		#{id}
+	</update>
+
+</mapper>

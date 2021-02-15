@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>layout</title>
+</head>
+<body>
+	<th:block th:include="fragments/sample/simple1"></th:block>
+	<th:block th:include="fragments/sample/simple2"></th:block>
+	<th:block layout:fragment="block1"></th:block>
+</body>
+</html>

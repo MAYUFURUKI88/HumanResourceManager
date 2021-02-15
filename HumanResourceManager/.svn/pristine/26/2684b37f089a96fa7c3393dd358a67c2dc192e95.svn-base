@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/default">
+
+<th:block layout:fragment="title">mybatis</th:block>
+<th:block layout:fragment="caption">mybatisサンプルです、悔しい情報はコードを参考してください。</th:block>
+<th:block layout:fragment="content">
+	<div>
+		<div class="mb-3">
+			<div class="_500">
+				実行順番
+			</div>
+			<div>
+				DevController.java -> DevService.java -> DevMapper.java -> DevMapper.xml
+			</div>
+		</div>
+		
+		<div class="mb-3">
+			<div class="_500">
+				実行 Query
+			</div>
+			<div>
+				select 1
+			</div>
+		</div>
+		
+		<div class="mb-3">
+			<div class="_500">
+				return value
+			</div>
+			<div>
+				<span th:remove="tag" th:utext="${ret}"></span>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+</html>

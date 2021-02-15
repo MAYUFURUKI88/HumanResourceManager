@@ -1,0 +1,185 @@
+	
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>人事管理アプリ</title>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+</head>
+
+<body>
+	<div class="main">
+		<div class="index-title">
+			<h1 class="title">社員情報　登録情報詳細</h1>
+			<ul class="index-menu">
+				<li><a href="../top" class="btn btn-info">TOP</a></li>
+				<li><a href="../employeesResult/1" class="btn btn-info">戻る</a></li>
+				<li><a href="../logout" class="btn btn-info">ログアウト</a></li>
+			</ul>
+		</div>
+		<div class="index-message">
+			<h3 class="message" style="color: red" th:text="${error}"
+				th:if="${validationError}" th:each="error : ${validationError}"></h3>
+			<h3 class="message" th:if="${getMessage}" th:text="${getMessage}"></h3>
+		</div>
+		<!-- th:objectでControllerに値を、同名の'result'に渡せる -->
+		<!-- onsubmitで送信ボタン押下時に起動するイベントを設定 -->
+		<form th:action="@{/employeesDetail}" th:object="${result}" th:method="POST"
+			onSubmit="return Check()">
+			<div class="container">
+				<div class="row">
+		    		<div class="col-sm4">
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">登録日付  </span>
+						  </div>
+						  <input type="date" id="date" class="form-control" name="date" th:field="*{date}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">社員番号  </span>
+						  </div>
+						  <input type="text" id="employeesId" class="form-control" name="employeesId" th:field="*{employeesId}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">姓  </span>
+						  </div>
+						  <input type="text" id="seiKj" class="form-control" name="seiKj" th:field="*{seiKj}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">名  </span>
+						  </div>
+						  <input type="text" id="meiKj" class="form-control" name="meiKj" th:field="*{meiKj}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">姓(かな)  </span>
+						  </div>
+						  <input type="text" id="seiKana" class="form-control" name="seiKana" th:field="*{seiKana}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">名(かな)  </span>
+						  </div>
+						  <input type="text" id="meiKana" class="form-control" name="meiKana" th:field="*{meiKana}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">性別 </span>
+							</div>
+							<select type="num" id="gender" class="form-control"
+								name="gender" th:field="*{gender}" aria-label="Username"
+								aria-describedby="basic-addon1">
+								<option value="9">（下記から選択してください）</option>
+								<option value=0>男性</option>
+								<option value=1>女性</option>
+							</select>
+						</div>
+
+						</div>
+    					<div class="col-sm4">
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">生年月日</span>
+						  </div>
+						  <input type="date" id="birthday" class="form-control" name="birthday" th:field="*{birthday}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">電話番号</span>
+						  </div>
+						  <input type="text" id="phoneNumber" class="form-control" name="phoneNumber" th:field="*{phoneNumber}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">住所</span>
+						  </div>
+						  <input type="text" id="address" class="form-control" name="address" th:field="*{address}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">雇用形態</span>
+						  </div>
+						  <input type="text" id="employment" class="form-control" name="employment" th:field="*{employment}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">部署名</span>
+						  </div>
+						  <input type="text" id="division" class="form-control" name="division" th:field="*{division}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">役職名</span>
+						  </div>
+						  <input type="text" id="jobTitle" class="form-control" name="jobTitle" th:field="*{jobTitle}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">入社日</span>
+						  </div>
+						  <input type="date" id="dateOfJoining" class="form-control" name="dateOfJoining" th:field="*{dateOfJoining}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">退職日</span>
+						  </div>
+						  <input type="date" id="dateOfRetirement" class="form-control" name="dateOfRetirement" th:field="*{dateOfRetirement}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+
+						</div>
+    					<div class="col-sm4">
+
+						<div class="input-group">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text">備考</span>
+						  </div>
+						  <textarea class="form-control" aria-label="With textarea" id="remarks" cols="20" rows="10" name="remarks" th:field="*{remarks}"></textarea>
+						</div>
+						<br>
+						<!-- 非表示データを送信出来る。便利。 -->
+						<input type="hidden" id="employeesId" name="employeesId" th:field="*{employeesId}">
+
+						<!-- 修正ボタン押下時に表示 -->
+						<script type="text/javascript">
+							function Check() {
+								if (window.confirm("修正します。よろしいですか。")) {
+									return true;
+								} else {
+									return false;
+								}
+							}
+						</script>
+
+						<!-- input type= "submit"で、送信ボタンを作成している -->
+						<input type="submit" value="修正する" class="btn btn-danger">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
+
+

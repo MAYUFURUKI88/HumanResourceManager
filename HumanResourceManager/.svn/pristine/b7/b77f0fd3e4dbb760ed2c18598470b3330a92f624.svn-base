@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="css/style.css">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+<link rel="stylesheet" href="css/reset.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+
+</head>
+<script>
+$(document).ready(function() {
+    $('#sort-table').tablesorter({
+    headers: {
+        0: { sorter: false },
+        7: { sorter: false },
+        8: { sorter: false }
+    }
+    });
+});
+</script>
+
+<body>
+	<div class="main">
+		<div class="index-title">
+			<h1 class="title">検索結果</h1>
+			<ul class="index-menu">
+				<li><a href="../top" class="btn btn-info">TOP</a></li>
+				<li><a href="../search" class="btn btn-info">戻る</a></li>
+				<li><a href="../logout" class="btn btn-info">ログアウト</a></li>
+			</ul>
+		</div>
+		<div class="index-message">
+		<h3 class="message" style="color: red" th:if="${error_message}" th:text="${error_message}"></h3>
+	</div>
+
+	<form th:action="@{/result}"  th:method="POST" onSubmit="return Check()">
+		<div class="container">
+		<!-- 件数表示 -->
+		<h4 align="right" th:text="'登録件数  全 ' + ${count} + ' 件 '"></h4>
+			<div class="y_data_area">
+
+				<table id="sort-table"class="table">
+				<thead class="thead-light">
+					<tr>
+								<th class="check"></th>
+								<th class="header-fixed">日付</th>
+								<th class="header-fixed">性</th>
+								<th class="header-fixed">名</th>
+								<th class="header-fixed">性<br>(かな)
+								</th>
+								<th class="header-fixed">名<br>(かな)
+								</th>
+								<th class="header-fixed">生年月日</th>
+								<th class="remarks">備考</th>
+								<th class="fix-sell">詳細</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="result:${result}">
+								<td><input type="checkbox" name="delete_ids"
+									th:value="${result.id}"></td>
+
+								<td th:text="${result.applicationDate}">登録日</td>
+								<td th:text="${result.seiKj}">苗字</td>
+								<td th:text="${result.meiKj}">名前</td>
+								<td th:text="${result.seiKana}">苗字(かな)</td>
+								<td th:text="${result.meiKana}">名前(かな)</td>
+								<td th:text="${result.birthday}">生年月日</td>
+								<td th:text="${result.remarksryak}">詳細</td>
+
+<!-- 詳細表示の改行設定 念のため保留
+						<td><th:block th:if="${result.remarks}">
+								備考
+								<th:block
+									th:each="line: ${result.remarks.split('\r\n|\r|\n', -1)}">
+									改行コードでsplitしてループ
+									<th:block th:text="${line}" />
+									<br />
+								</th:block>
+							</th:block></td> -->
+
+						<!-- 修正ボタンから遷移するurlにID情報を付ける -->
+						<td><a href="fix"
+							th:href="@{/fix/{fix_id}(fix_id=${result.id})}">
+							<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pen" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  <path fill-rule="evenodd" d="M5.707 13.707a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391L10.086 2.5a2 2 0 0 1 2.828 0l.586.586a2 2 0 0 1 0 2.828l-7.793 7.793zM3 11l7.793-7.793a1 1 0 0 1 1.414 0l.586.586a1 1 0 0 1 0 1.414L5 13l-3 1 1-3z"/>
+							  <path fill-rule="evenodd" d="M9.854 2.56a.5.5 0 0 0-.708 0L5.854 5.855a.5.5 0 0 1-.708-.708L8.44 1.854a1.5 1.5 0 0 1 2.122 0l.293.292a.5.5 0 0 1-.707.708l-.293-.293z"/>
+							  <path d="M13.293 1.207a1 1 0 0 1 1.414 0l.03.03a1 1 0 0 1 .03 1.383L13.5 4 12 2.5l1.293-1.293z"/>
+							</svg>
+						</a></td>
+
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+				<script type="text/javascript">
+				function Check() {
+					if (window.confirm("削除します。よろしいですか。")) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			</script>
+
+
+				<div style="position: relative;margin: auto;text-align: center;">
+					<p style="display:inline;">
+						<a th:href="@{/result/{result_id}(result_id=${ago})}">
+							前へ
+						</a>
+					</p>
+					<p style="display:inline;">
+					...
+					</p>
+						<span th:each="linkNumber:${linkNumbers}" > <!--ページに応じたリンクボタンを表示 -->
+							<a th:href="@{/result/{result_id}(result_id=${linkNumber})}"> <span
+								th:text="${linkNumber}"></span>
+							</a>
+						</span>
+					<p style="display:inline;">
+					...
+					</p>
+					<p style="display:inline;">
+						<a th:href="@{/result/{result_id}(result_id=${behind})}">
+							次へ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</a>
+					</p>
+					<p style="display:inline;" th:text="${resultPageTo} + ページ中 + ${resultPageFrom} + ページ" ></p>
+					<br/>
+
+
+				<br><input type="submit" value="削除" class="btn btn-danger">
+
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

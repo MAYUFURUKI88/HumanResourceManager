@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/default">
+
+<th:block layout:fragment="title">toastr</th:block>
+<th:block layout:fragment="caption">すべての実行後に必ずtoastrを入れてください。</th:block>
+<th:block layout:fragment="content">
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			注意 toast
+		</div>
+		<button class="btn btn-outline b-warning text-warning" onclick="toastDemo('warning');">
+			Warning
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			完了 toast
+		</div>
+		<button class="btn btn-outline b-success text-success" onclick="toastDemo('success');">
+			Success
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			エラー toast
+		</div>
+		<button class="btn btn-outline b-danger text-danger" onclick="toastDemo('error');">
+			Error
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			アニメーションなしでトーストをすぐに消します。
+		</div>
+		<button class="btn btn-outline b-accent text-accent" onclick="toastDemo('remove');">
+			Remove
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			トーストを消します。
+		</div>
+		<button class="btn btn-outline b-accent text-accent" onclick="toastDemo('clear');">
+			Clear
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			5秒後にトーストが消えます。
+		</div>
+		<button class="btn btn-outline b-success text-success" onclick="toastDemo('timeout');">
+			Timeout
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500">
+			reference
+		</div>
+		<a target="_blank" href="https://github.com/CodeSeven/toastr">
+			https://github.com/CodeSeven/toastr
+		</a>
+	</div>
+</th:block>
+
+<th:block layout:fragment="javascript">
+	<script>
+		function toastDemo(type) {
+			if (type === 'warning') {
+				toastr.warning('正しい入力をおねがいします。', '注意');
+			} else if (type === 'success') {
+				toastr.success('登録しました。', '完了')
+			} else if (type === 'error') {
+				toastr.error('サーバーに問題が発生しました。', 'エラー')
+			} else if (type === 'remove') {
+				// アニメーションなしでトーストをすぐに消します。
+				toastr.remove()
+			} else if (type === 'clear') {
+				// トーストを消します。
+				toastr.clear()
+			} else if (type === 'timeout') {
+				// 3番目のパラメータを確認してください。
+				// 5秒後にトーストが消えます。
+				toastr.success('登録しました。', '完了', {timeOut: 5000})
+			}			
+		}
+	</script>
+</th:block>
+
+</html>

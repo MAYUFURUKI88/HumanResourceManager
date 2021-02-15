@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>人事管理アプリ</title>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/reset.css}">
+</head>
+
+<body>
+	<div class="main">
+		<div class="index-title">
+
+			<script type="text/javascript">
+				function submitbtn() {
+					if (window.confirm("ログアウトします。よろしいですか。")) {
+						link = "/login";
+						href = "/login";
+					} else {
+						link = "detail";
+						href = "detail";
+					}
+					ret = confirm(link + "へ飛びます。宜しいですか？");
+					if (ret == true) {
+						location.href = href;
+					}
+				}
+			</script>
+
+			<h1 class="title">応募者登録編集画面</h1>
+			<ul class="index-menu">
+				<li><a href="../top" class="btn btn-info">TOP</a></li>
+				<li><a href="../result/1" class="btn btn-info">戻る</a></li>
+				<li><input type="submit" value="ログアウト" href="../login"
+					onclick="submitbtn();" class="btn btn-info"></li>
+
+			</ul>
+		</div>
+		<div class="index-message">
+			<h3 class="message" style="color: red" th:text="${error}"
+				th:if="${validationError}" th:each="error : ${validationError}"></h3>
+			<h3 class="message" th:if="${getMessage}" th:text="${getMessage}"></h3>
+		</div>
+		<!-- th:objectでControllerに値を、同名の'result'に渡せる -->
+		<!-- onsubmitで送信ボタン押下時に起動するイベントを設定 -->
+		  <form th:action="@{/detail}" th:object="${result}"
+		  th:method="POST">
+
+			<div class="container">
+				<div class="row">
+					<!-- グループの設定 -->
+
+					<div class="col-4 offset-2">
+						<!-- col横幅の調整 -->
+						<!-- offset横のマスの設定 -->
+
+							<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">姓 </span>
+						</div>
+						<input type="text" id="seiKj" class="form-control" name="seiKj"
+							th:field="*{seiKj}" placeholder="山田" aria-label="Username"
+							aria-describedby="basic-addon1">
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">姓(かな)<font
+								color="red">※</font>
+							</span>
+						</div>
+						<input type="text" required pattern="[あ-ん]*"
+							title="ひらがなのみで入力して下さい。" id="seiKana" class="form-control"
+							name="seiKana" th:field="*{seiKana}" placeholder="やまだ"
+							aria-label="Username" aria-describedby="basic-addon1">
+					</div>
+
+				</div>
+				<div class="col-sm-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">名 </span>
+						</div>
+						<input type="text" id="meiKj" class="form-control" name="meiKj"
+							th:field="*{meiKj}" placeholder="太郎" aria-label="Username"
+							aria-describedby="basic-addon1">
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">名(かな)<font
+								color="red">※</font>
+							</span>
+						</div>
+						<input type="text" required pattern="[あ-ん]*"
+							title="ひらがなのみで入力して下さい。" id="meiKana" class="form-control"
+							name="meiKana" th:field="*{meiKana}" placeholder="たろう"
+							aria-label="Username" aria-describedby="basic-addon1">
+					</div>
+
+					</div>
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="col-md-4 offset-md-2">
+
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">登録日付 </span>
+									</div>
+									<input type="date" id="applicationDate" class="form-control"
+										name="applicationDate" th:field="*{applicationDate}"
+										placeholder="Username" aria-label="Username"
+										aria-describedby="basic-addon1">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="col-md-4 offset-md-2">
+
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">電話番号</span>
+									</div>
+									<input type="text" id="phoneNumber" class="form-control"
+										name="phoneNumber" th:field="*{phoneNumber}"
+										placeholder="000-0000-0000" aria-label="Username"
+										aria-describedby="basic-addon1">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<!-- colで横幅の調整（住所） -->
+							<div class="col-md-6 offset-md-2">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">住所</span>
+									</div>
+									<input type="text" id="address" class="form-control"
+										name="address" th:field="*{address}"
+										placeholder="福岡県福岡市中央区××××" aria-label="Username"
+										aria-describedby="basic-addon1">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="col-md-6 offset-md-2">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">メール</span>
+									</div>
+									<input type="text" list="val-list" id="email"
+										th:field="*{mailCode}" aria-label="Username" size="32"
+										placeholder="メールアドレスを入力して下さい">
+									<datalist id="val-list">
+										<option>@icloud.com</option>
+										<option>@docomo.ne.jp</option>
+										<option>@softbank.ne.jp</option>
+										<option>@ezweb.ne.jp</option>
+									</datalist>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-4 offset-2">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">年齢</span>
+							</div>
+							<input type="number" min="17" max="60" id="age"
+								class="form-control" name="age" th:field="*{age}"
+								placeholder="17～60歳まで" aria-label="Username"
+								aria-describedby="basic-addon1">
+						</div>
+					</div>
+
+
+					<div class="col-sm-4">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">性別 </span>
+							</div>
+							<select type="num" id="gender" class="form-control" name="gender"
+								th:field="*{gender}" aria-label="Username"
+								aria-describedby="basic-addon1">
+								<option value="9">（下記から選択してください）</option>
+								<option value=0>男姓</option>
+								<option value=1>女姓</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-4 offset-2">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">実務経験 </span>
+							</div>
+							<select th:field="*{experienceCode}" class="form-control"
+								aria-label="Username" aria-describedby="basic-addon1">
+								<option value=>（下記から選択してください）</option>
+								<option th:each="entry: ${experienceCodeMap}"
+									th:text="${entry.value}" th:value="${entry.key}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">希望職種 <font
+									color="red">※</font>
+								</span>
+							</div>
+
+							<select th:field="*{hopeJobCode}" class="form-control"
+								aria-label="Username" aria-describedby="basic-addon1">
+								<option value=>（下記から選択してください）</option>
+								<option th:each="entry: ${hopeJobCodeMap}"
+									th:text="${entry.value}" th:value="${entry.key}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-4 offset-2">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">選考状況 <font
+									color="red">※</font></span>
+							</div>
+							<select th:field="*{selectionCode}" class="form-control"
+								aria-label="Username" aria-describedby="basic-addon1">
+								<option value=>（下記から選択してください）</option>
+								<option th:each="entry: ${selectionCodeMap}"
+									th:text="${entry.value}" th:value="${entry.key}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">応募媒体<font
+									color="red">※</font></span>
+							</div>
+							<select th:field="*{mediumCode}" class="form-control"
+								aria-label="Username" aria-describedby="basic-addon1">
+								<option value=>（下記から選択してください）</option>
+								<option th:each="entry: ${mediumCodeMap}"
+									th:text="${entry.value}" th:value="${entry.key}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="col-4 offset-2">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">希望職種に関する経歴
+								</span>
+							</div>
+							<select type="num" id="career" class="form-control" name="career"
+								th:field="*{career}" aria-label="Username"
+								aria-describedby="basic-addon1">
+								<option value="9">（下記から選択してください）</option>
+								<option value=0>有</option>
+								<option value=1>無</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-sm-8 offset-2">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">備考</span>
+							</div>
+							<textarea class="form-control" aria-label="With textarea"
+								id="remarks" cols="20" rows="10" name="remarks"
+								th:field="*{remarks}"></textarea>
+						</div>
+
+					</div>
+					<br>
+					<!-- 非表示データを送信出来る。便利。 -->
+					<input type="hidden" id="id" name="id" th:field="*{id}">
+
+					<!-- 修正ボタン押下時に表示 -->
+					<script type="text/javascript">
+						function Check() {
+							if (window.confirm("修正します。よろしいですか。")) {
+								return true;
+							} else {
+								return false;
+							}
+						}
+					</script>
+					<!-- input type= "submit"で、送信ボタンを作成している -->
+                      <input type="submit" value="修正する" class="btn btn-info">
+
+				</div>
+
+			</div>
+	</form>
+	</div>
+</body>
+
+</html>

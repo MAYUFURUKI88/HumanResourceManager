@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.rapideact.local.humanresource.mybatis.mapper.LoginMapper">
+
+  <select id="findAccount" resultType="com.rapideact.local.humanresource.Account"
+                             parameterType="String">
+        SELECT
+           name,
+           password
+        FROM
+           user
+        WHERE
+           name = #{userName}
+
+    </select>
+
+</mapper>

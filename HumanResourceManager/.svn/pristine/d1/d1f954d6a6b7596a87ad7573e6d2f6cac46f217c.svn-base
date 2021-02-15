@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/rapide_hrm?characterEncoding=UTF-8
+    username: rapide
+    password: '0000' 
+  thymeleaf:
+    enabled: true
+    cache: false
+
+mybatis:
+  config-location: classpath:configs/mybatis-config.xml 
+  mapper-locations: classpath:mappers/*.xml

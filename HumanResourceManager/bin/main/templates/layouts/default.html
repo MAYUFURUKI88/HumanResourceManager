@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<th:block th:include="fragments/head"></th:block>
+<th:block th:include="fragments/css"></th:block>
+<th:block layout:fragment="css"></th:block>
+</head>
+<body>
+	<!-- header -->
+	<th:block th:include="fragments/header"></th:block>
+
+	<div class="app" id="app">
+
+		<!-- aside -->
+		<th:block th:include="fragments/aside"></th:block>
+
+		<!-- content -->
+		<div id="content" class="app-content box-shadow-0" role="main">
+			<div class="hide">
+				<div class="content-header" id="content-header"></div>
+			</div>
+			<div class="content-main " id="content-main">
+				<div class="padding">
+					<div class="box light lt">
+						<div class="box-header white">
+							<h3>
+								<th:block layout:fragment="title"></th:block>
+							</h3>
+							<small> <th:block layout:fragment="caption"></th:block>
+							</small>
+						</div>
+						<div class="box-body">
+							<th:block layout:fragment="content"></th:block>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- footer -->
+			<th:block th:include="fragments/footer"></th:block>
+		</div>
+	</div>
+
+	<!-- javascript -->
+	<th:block th:include="fragments/js"></th:block>
+	<th:block layout:fragment="javascript"></th:block>
+</body>
+</html>

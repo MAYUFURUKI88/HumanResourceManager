@@ -1,0 +1,157 @@
+<div id="aside" class="app-aside fade box-shadow-x nav-expand white" aria-hidden="true">
+	<div class="sidenav modal-dialog dk">
+
+		<div class="navbar d-lg-none">
+			<a href="javascript:location.href='/';" class="navbar-brand"> 
+				<img src="/img/rapide-act.png" alt="rapide-act">
+			</a>
+		</div>
+
+		<!-- Flex nav content -->
+		<div class="flex hide-scroll">
+			<div class="scroll">
+				<div class="nav-stacked nav-active-theme" data-nav>
+					<ul class="nav">
+						<li class="nav-header">
+							<span class="text-xs hidden-folded">開発用</span>
+						</li>
+						
+						<!-- single menu sample -->
+						<li>
+							<a href="#"> 
+								<span class="nav-icon"> 
+									<i class="fa fa-star"></i>
+								</span> 
+								<span class="nav-text">Single Menu</span>
+							</a>
+						</li>
+						
+						<!-- multi menu sample -->
+						<li>
+							<a> 
+								<span class="nav-caret"> 
+									<i class="fa fa-caret-down"></i>
+								</span> 
+								<span class="nav-icon"> 
+									<i class="fa fa-star"></i>
+								</span> 
+								<span class="nav-text">Group Menu</span>
+							</a>
+							<ul class="nav-sub">
+								<li>
+									<a href="#"> 
+										<span class="nav-text">Inner Menu1</span>
+									</a>
+								</li>
+								<li>
+									<a href="#"> 
+										<span class="nav-text">Inner Menu2</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+						
+						<!-- dev menu sample -->
+						<li>
+							<a> 
+								<span class="nav-caret"> 
+									<i class="fa fa-caret-down"></i>
+								</span> 
+								<span class="nav-icon"> 
+									<i class="fa fa-star"></i>
+								</span> 
+								<span class="nav-text">Dev</span>
+							</a>
+							<ul class="nav-sub">
+								<li>
+									<a href="javascript:location.href='/dev/frame';"> 
+										<span class="nav-text">frame</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:location.href='/dev/mybatis';"> 
+										<span class="nav-text">mybatis</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:location.href='/dev/toastr';"> 
+										<span class="nav-text">toastr</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:location.href='/dev/sweetalert2';"> 
+										<span class="nav-text">sweetalert2</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:location.href='/dev/datatables';"> 
+										<span class="nav-text">datatables</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:location.href='/login';"> 
+										<span class="nav-text">login page</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:location.href='/dev/springSecurity';"> 
+										<span class="nav-text">spring security</span>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:location.href='/dev/springSecurityAdmin';"> 
+										<span class="nav-text">spring security admin</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li class="nav-header">
+							<span class="text-xs hidden-folded">メニュー</span>
+						</li>
+						
+						<!-- 管理者 -->
+						<li>
+							<a href="javascript:location.href='/admin';"> 
+								<span class="nav-icon"> 
+									<i class="fa fa-user"></i>
+								</span> 
+								<span class="nav-text">管理者</span>
+							</a>
+						</li>
+						
+						<!-- 応募者 -->
+						<li>
+							<a href="javascript:location.href='/applicant';"> 
+								<span class="nav-icon"> 
+									<i class="fa fa-users"></i>
+								</span> 
+								<span class="nav-text">応募者</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- sidenav bottom -->
+		<div class="no-shrink ">
+			<div class="nav-fold">
+				<a class="d-flex p-2-3" data-toggle="dropdown"> 
+					<span class="avatar w-28 grey hide">J</span> 
+					<img src="/img/profile.png" alt="profile" class="w-28 circle">
+				</a>
+				<div class="hidden-folded flex p-2-3 bg">
+					<div class="d-flex p-1">
+						<div class="flex text-nowrap">
+							管理者
+						</div> 
+						<a href="/logout" class="px-2" data-toggle="tooltip" title="ログアウト"> 
+							<i class="fa fa-power-off text-muted"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

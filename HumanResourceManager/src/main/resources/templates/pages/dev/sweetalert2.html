@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/default">
+
+<th:block layout:fragment="css">
+</th:block>
+
+<th:block layout:fragment="title">ここにタイトルを入力</th:block>
+<th:block layout:fragment="caption">ここに説明を入力</th:block>
+<th:block layout:fragment="content">
+<div class="mb-3">
+		<div class="_500 mb-1">
+			注意 alert
+		</div>
+		<button class="btn btn-outline b-warning text-warning" onclick="sweetalertDemo('warning');">
+			Warning
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			完了 alert
+		</div>
+		<button class="btn btn-outline b-success text-success" onclick="sweetalertDemo('success');">
+			Success
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			エラー alert
+		</div>
+		<button class="btn btn-outline b-danger text-danger" onclick="sweetalertDemo('error');">
+			Error
+		</button>
+	</div>
+	
+	<div class="mb-3">
+		<div class="_500 mb-1">
+			情報 alert
+		</div>
+		<button class="btn btn-outline b-info text-info" onclick="sweetalertDemo('info');">
+			Info
+		</button>
+	</div>
+</th:block>
+
+<th:block layout:fragment="javascript">
+	<script>
+		function sweetalertDemo(type) {
+			if (type === "warning") {
+				Swal.fire({
+				  icon: 'warning',
+				  title: '注意',
+				  text: '正しい入力をおねがいします。',
+				  confirmButtonColor: '#fdab29'
+				});
+			} else if (type === "success") {
+				Swal.fire({
+				  icon: 'success',
+				  title: '完了',
+				  text: '登録しました。',
+				  confirmButtonColor: '#22b66e'
+				});
+			} else if (type === "error") {
+				Swal.fire({
+				  icon: 'error',
+				  title: 'エラー',
+				  text: 'サーバーに問題が発生しました。',
+				  confirmButtonColor: '#ea2e49'
+				});
+			} else if (type === "info") {
+				Swal.fire({	
+				  icon: 'info',
+				  title: '情報',
+				  text: '性別は男と女があります。',
+				  confirmButtonColor: '#14baa8'
+				});
+			}
+		}
+	</script>
+</th:block>
+
+</html>

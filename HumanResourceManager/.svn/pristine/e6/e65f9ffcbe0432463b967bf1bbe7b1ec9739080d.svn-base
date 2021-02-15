@@ -1,0 +1,35 @@
+.logo-rapide-act {
+    width: 120px;
+    height: 28px;
+}
+
+.header-color {
+	background-color: #fdfdfd;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+.button-bar-left {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.button-bar-center {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.button-bar-right {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.icon-m {
+    margin-right: 5px;
+}
+
+.w-100p {
+	width: 100% !important;
+}

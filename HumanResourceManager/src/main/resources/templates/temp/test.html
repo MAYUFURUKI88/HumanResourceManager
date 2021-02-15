@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>test</title>
+        <link rel="stylesheet" th:href="@{/css/test.css}"/>
+    </head>
+
+    <body>
+        <div>
+            <h1>TESTページ</h1>
+        </div>
+        <div>
+            <p th:text="'ようこそ、' + ${result.name} + 'さん'"></p>
+        </div>
+    </body>
+</html>

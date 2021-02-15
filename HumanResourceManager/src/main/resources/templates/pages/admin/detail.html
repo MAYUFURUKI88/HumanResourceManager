@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/default">
+
+<th:block layout:fragment="css">
+</th:block>
+
+<th:block layout:fragment="title">管理者登録</th:block>
+<th:block layout:fragment="caption">管理者を登録できます。</th:block>
+<th:block layout:fragment="content">
+	<div class="box">
+		<div class="box-body">
+			<form action="javascript:void(0);">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputAccount">アカウント</label> 
+						<input type="text" class="form-control" id="inputAccount" placeholder="admin">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputPassword">パスワード</label> 
+						<input type="password" class="form-control" id="inputPassword" placeholder="1234">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputUsername">ユーザー名</label> 
+						<input type="email" class="form-control" id="inputUsername" placeholder="石原 さとみ">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputLevel">権限</label> 
+						<select class="form-control input-c" id="inputLevel">
+							<option value="">選択</option>
+							<option value="K">管理者</option>
+							<option value="S">総務</option>
+							<option value="J">人事</option>
+						</select>
+					</div>
+				</div>
+				<div class="button-bar-right">
+					<button class="btn btn-outline b-warn text-warn" onclick="moveList()">
+						<i class="fa fa-arrow-left icon-m"></i> 戻る
+					</button>
+					<button class="btn btn-outline b-warning text-warning" onclick="formReset()">
+						<i class="fa fa-refresh icon-m"></i> リセット
+					</button>
+					<button class="btn btn-outline b-success text-success" onclick="create()">
+						<i class="fa fa-plus icon-m"></i> 登録
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</th:block>
+
+<th:block layout:fragment="javascript">
+<script>
+function moveList() {
+	location.href='/admin';
+}
+
+function formReset() {
+	toastr.warning('まだ開発しています。', '注意');
+}
+
+function create() {
+	toastr.warning('まだ開発しています。', '注意');
+	
+}
+</script>
+</th:block>
+
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.rapideact.local.humanresource.mappers.DevMapper">
+	<select id="test" resultType="java.lang.Integer">
+		select 1
+	</select>
+	
+	<select id="getDemoCount" resultType="java.lang.Integer">
+		select count(id)
+		from demo
+	</select>
+	
+	<select id="getDemoData" 
+			parameterType="com.rapideact.local.humanresource.models.DevModel" 
+			resultType="hashmap">
+		select d.name, c.name as gender
+		from demo d
+		join code c
+		on d.gender = c.code
+		where d.delete_yn = 'N'	
+		and c.group_code = 001 
+		<if test="searchName != null">
+			AND d.name like CONCAT('%', #{searchName}, '%')
+		</if>
+		<if test="searchGender != null">
+			AND d.gender = #{searchGender}
+		</if>
+		order by ${orderColumnName} ${orderDir}
+		limit #{length}
+		offset #{start}
+	</select>
+</mapper>

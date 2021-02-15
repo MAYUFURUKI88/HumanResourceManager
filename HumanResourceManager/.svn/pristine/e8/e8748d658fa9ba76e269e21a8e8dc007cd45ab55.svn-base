@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/sample/simple">
+
+<th:block layout:fragment="block1">
+	<link rel="stylesheet" href="/css/simple.css">
+	<h1 class="debug">inject block (1)</h1>
+</th:block>
+</html>

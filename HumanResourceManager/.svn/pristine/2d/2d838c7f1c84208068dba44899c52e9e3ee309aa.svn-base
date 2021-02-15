@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/reset.css}" />
+</head>
+
+
+<body>
+	<div class="main">
+			<!-- タイトル＋ヘッダー -->
+			<div class="index-title">
+				<h1 class="title">社員情報TOP</h1>
+				<ul class="index-menu">
+					<li><a href="top" class="btn btn-info">TOP</a></li>
+					<li><a href="top" class="btn btn-info">戻る</a></li>
+					<li><a href="logout" class="btn btn-info">ログアウト</a></li>
+				</ul>
+			</div>
+			<!-- メッセージ -->
+			<div class="index-message">
+				<h3 class="message" style="color: red;" th:text="${error}"
+					th:if="${validationError}" th:each="error : ${validationError}"></h3>
+				<h3 class="message" th:if="${success_message}" th:text="${success_message}"></h3>
+			</div>
+			<form th:action="@{/employeesTop}"
+				th:method="POST">
+				<div class="container">
+			<div class="jumbotron"  style="background-color:#E768C6;">
+				<h1 class="display-4" style="font-weight: bolder; color: #ffffff ">社員管理</h1>
+		  		<p class="lead" style="color:#0C3389"><br>ラピードアクト社員に関する情報を一元管理する　　契約社員やパートナー等
+		  		の情報も管理</p>
+		  		<hr class="my-4">
+		  		<div class="row">
+					<div class="col-sm-4">
+						<p style="color:#595959">- 社員を登録できる -</p>
+			  			<a href="/employeesRegister" class="btn btn-light btn-lg"> 社員登録 </a>
+						<p style="color:#595959">- 社員の一覧を表示する -</p>
+						<a href="/employeesSearch"  class="btn btn-light btn-lg"> 社員一覧 </a>
+					</div>
+					<div class="col-sm-4">
+						<p style="color:#595959">- 勤怠管理ができる -</p>
+			  			<a href="/employeesAttendance/1" class="btn btn-light btn-lg"> 勤怠管理 </a>
+			  			<p style="color:#595959">- 提出物状況ができる -</p>
+			  			<a href="/employeesReport" class="btn btn-light btn-lg"> 提出物管理 </a>
+					</div>
+					<div class="col-sm-4">
+						<p style="color:#595959">- 勤怠・提出物の状況ができる -</p>
+						<a href=""  class="btn btn-light btn-lg"> 勤怠情報サマリ </a>
+						<p style="color:#595959">- ○○管理ができる -</p>
+						<a href=""  class="btn btn-light btn-lg"> ○○管理 </a>
+					</div>
+				</div>
+			</div>
+		</div>
+			</form>
+		</div>
+</body>
+
+</html>

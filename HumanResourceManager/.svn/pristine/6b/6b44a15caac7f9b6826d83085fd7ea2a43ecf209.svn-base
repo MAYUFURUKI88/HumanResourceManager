@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/default">
+
+<th:block layout:fragment="css">
+</th:block>
+
+<th:block layout:fragment="title">datatables</th:block>
+<th:block layout:fragment="caption">ページングが簡単に実現できるライブラリーです。</th:block>
+<th:block layout:fragment="content">
+	<div class="form-group">
+		<div class="row">
+			<div class="col-2">
+				<label for="search_name">名前</label>
+				<input type="text" class="form-control" id="search_name">
+			</div>
+			<div class="col-2">
+				<label for="search_name">性別</label>
+				<select class="form-control input-c" id="search_gender">
+					<option value="">選択</option>
+					<option value="M">男</option>
+					<option value="F">女</option>
+		        </select>
+			</div>
+		</div>
+    </div>
+    <div class="button-bar-right">
+    	<button class="btn btn-outline b-warn text-warn" onclick="notSupport()">
+    		<i class="fa fa-arrow-left icon-m"></i>
+			戻る
+		</button>
+    	<button class="btn btn-outline b-danger text-danger" onclick="notSupport()">
+    		<i class="fa fa-trash icon-m"></i>
+			削除
+		</button>
+		<button class="btn btn-outline b-accent text-accent" onclick="notSupport()">
+    		<i class="fa fa-check icon-m"></i>
+			修正
+		</button>
+    	<button class="btn btn-outline b-success text-success" onclick="notSupport()">
+    		<i class="fa fa-plus icon-m"></i>
+			登録
+		</button>
+    	<button class="btn btn-outline b-warning text-warning" onclick="reset()">
+    		<i class="fa fa-refresh icon-m"></i>
+    		リセット
+    	</button>	
+    	<button class="btn btn-outline b-primary text-primary" onclick="search()">
+    		<i class="fa fa-search icon-m"></i>
+    		検索
+    	</button>
+    </div>
+	<table id="demo" class="table v-middle p-0 m-0 box dataTable no-footer">
+	    <thead>
+	        <tr>
+	            <th class="text-center">名前</th>
+	            <th class="text-center">性別</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    </tbody>
+	</table>
+</th:block>
+
+<th:block layout:fragment="javascript">
+<script>
+var datatables;
+$(document).ready(function () {
+    datatables = $('#demo').DataTable({
+    	dom: '<"top"Bf>rtp<"bottom"li>',
+    	paging: true,
+        ordering: true,
+        info: false,
+        filter: false,
+        lengthChange: true,
+        stateSave: false,
+        pagingType: "full_numbers",
+        scrollX: false,
+        scrollCollapse: false,
+        processing: true,
+        serverSide: true,
+        drawCallback: function () {
+        	$('.dataTables_length').css('margin-top', '10px');
+        	$('.dataTables_paginate').css('margin-top', '5px');
+        },
+        ajax: {
+            url: "/api/dev/datatables",
+            type: "GET",
+            dataType: "json",
+            data: {
+            	searchName: function() { return $('#search_name').val() },
+            	searchGender: function() { return $('#search_gender').val() },
+            },
+        },
+        columns: [
+        	{data: "name"},
+            {data: "gender"}
+        ],
+        columnDefs: [
+            {
+                targets: 0,
+                visible: true,
+                render: function (data) {
+                    return data;
+                }
+            },
+            {
+                targets: 1,
+                visible: true,
+                render: function (data) {
+                    return data;
+                }
+            }
+        ],
+        language: {
+            lengthMenu: "データ表示数 _MENU_",
+            zeroRecords: "データが存在しません。",
+            info: "Showing page _PAGE_ of _PAGES_",
+            infoEmpty: "No records available",
+            infoFiltered: "(filtered from _MAX_ total records)",
+            paginate: {	
+                first: '初',
+                last: '完',
+                previous: "以前",
+                next: "次"
+            }
+        },
+    });
+});
+
+function notSupport(){
+	toastr.warning('ボタンデザインをご使用ください。<br>機能はありません。', '注意');
+}
+
+function search() {
+	datatables.ajax.reload();
+	toastr.success('検索が完了しました。', '完了');
+}
+
+function reset() {
+	$('#search_name').val('');
+	$('#search_gender').val('');
+	datatables.ajax.reload();
+	toastr.success('リセットが完了しました。', '完了');
+}
+</script>
+</th:block>
+
+</html>

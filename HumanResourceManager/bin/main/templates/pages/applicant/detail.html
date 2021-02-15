@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/default">
+
+<th:block layout:fragment="css">
+</th:block>
+
+<th:block layout:fragment="title">応募者登録</th:block>
+<th:block layout:fragment="caption">応募者を登録できます。</th:block>
+<th:block layout:fragment="content">
+	<div class="box">
+		<div class="box-body">
+			<form action="javascript:void(0);">
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputFamilyName">姓</label> 
+						<input type="text" class="form-control" id="inputFamilyName" placeholder="石原">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputName">名</label> 
+						<input type="text" class="form-control" id="inputName" placeholder="さとみ">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputFamilyNameKana">姓(かな)</label> 
+						<input type="text" class="form-control" id="inputFamilyNameKana" placeholder="イシハラ">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputNameKana">名(かな)</label> 
+						<input type="text" class="form-control" id="inputNameKana" placeholder="サトミ">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputPhone">電話番号</label> 
+						<input type="text" class="form-control" id=inputPhone placeholder="090-1234-1234">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputEmail">メールアドレス</label> 
+						<input type="email" class="form-control" id="inputEmail" placeholder="applicant@rapide-act.com">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputBirth">年齢</label> 
+						<select class="form-control input-c" id="inputBirth">
+							<option value="">選択</option>
+							<option value="K">2020 年</option>
+							<option value="S">2019 年</option>
+							<option value="J">2018 年</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputGender">性別 </label> 
+						<select class="form-control input-c" id="inputGender">
+							<option value="">選択</option>
+							<option value="M">男</option>
+							<option value="F">女</option>
+				        </select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputAddress">住所</label> 
+						<input type="text" class="form-control" id="inputAddress" placeholder="〒810-0022 福岡県福岡市中央区薬院３丁目１１−３ 薬院ＴＳビル 7階">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputExpYn">実務経験</label> 
+						<select class="form-control input-c" id="inputExpYn">
+							<option value="">選択</option>
+							<option value="M">有</option>
+							<option value="F">無</option>
+				        </select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputApplyType">希望職種</label> 
+						<select class="form-control input-c" id="inputApplyType">
+							<option value="">選択</option>
+							<option value="M">SE</option>
+							<option value="F">IE</option>
+							<option value="F">PG</option>
+							<option value="F">SES営業</option>
+							<option value="F">事務</option>
+				        </select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputStatus">選考状況</label> 
+						<select class="form-control input-c" id="inputStatus">
+							<option value="">選択</option>
+							<option value="M">応募</option>
+							<option value="F">書類選考</option>
+							<option value="F">一次面接</option>
+							<option value="F">二次面接</option>
+							<option value="F">内定</option>
+							<option value="F">入社</option>	
+							<option value="F">NG・辞退</option>	
+				        </select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputMediaType">応募媒体</label> 
+						<select class="form-control input-c" id="inputMediaType">
+							<option value="">選択</option>
+							<option value="M">求人情報誌</option>
+							<option value="F">ハローワーク</option>
+							<option value="F">会社HP</option>
+				        </select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputAccount">希望職種に関する経歴</label>
+						<textarea class="form-control" rows="5" id="inputReason"></textarea>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputAccount">備考</label>
+						<textarea class="form-control" rows="3" id="inputAdditionInput"></textarea>
+					</div>
+				</div>
+				<div class="button-bar-right">
+					<button class="btn btn-outline b-warn text-warn" onclick="moveList()">
+						<i class="fa fa-arrow-left icon-m"></i> 戻る
+					</button>
+					<button class="btn btn-outline b-warning text-warning" onclick="formReset()">
+						<i class="fa fa-refresh icon-m"></i> リセット
+					</button>
+					<button class="btn btn-outline b-success text-success" onclick="create()">
+						<i class="fa fa-plus icon-m"></i> 登録
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</th:block>
+
+<th:block layout:fragment="javascript">
+<script>
+function moveList() {
+	location.href='/applicant';
+}
+
+function formReset() {
+	toastr.warning('まだ開発しています。', '注意');
+}
+
+function create() {
+	toastr.warning('まだ開発しています。', '注意');
+	
+}
+</script>
+</th:block>
+
+</html>
